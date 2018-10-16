@@ -1,56 +1,74 @@
 import React, { Component } from 'react';
+import Form from "./Form.js";
+import Button from "./Button.js";
+import Artists from "./Artists.js";
 import './App.css';
-import Card from "./Card.js";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: []
+      isLogged: true
     }
 
-    this.handleClick = this.handleClick.bind(this)
+    this.signUp = this.signUp.bind(this);
+    this.login = this.login.bind(this);
   }
 
   componentDidMount() {
-    // const options = {
-    //   method: "post",
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   credentials: 'include',
-    //   body: JSON.stringify({email: "rafael@laboratoria.la", password: "banana"})
-    // };
-
-    // fetch("https://peaceful-badlands-98440.herokuapp.com/login", options)
-    // .then(res => res.json())
-    // .then(data => console.log(data))
   }
 
-  handleClick() {
+  login() {
+    const userEmail = document.querySelector("#input-email").value;
+    const userPass = document.querySelector("#input-password").value;
+
     const options = {
-      method: "get",
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
-      credentials: 'include'
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({email: userEmail, password: userPass})
     };
 
-    fetch("https://peaceful-badlands-98440.herokuapp.com/artists", options)
+    fetch("https://peaceful-badlands-98440.herokuapp.com/login", options)
     .then(res => res.json())
-    .then(data => this.setState({data}))
+    .then(data => this.setState({isLogged: true}))
+  }
+
+  signUp() {
+    const userEmail = document.querySelector("#input-email").value;
+    const userPass = document.querySelector("#input-password").value;
+
+    const options = {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({email: userEmail, password: userPass})
+    };
+
+    fetch("https://peaceful-badlands-98440.herokuapp.com/signup", options)
+    .then(res => res.json())
+    .then(data => console.log(data))
   }
 
   render() {
+    if (this.state.isLogged === false) {
     return (
       <div>
-        <Card>
-          Ouça músicas
-          <button onClick={this.handleClick}>Ver artistas</button>
-        </Card>
+        <Form />
+        <button type="button" onClick={this.signUp}> Cadastre-se </button>
+        <button type="button" onClick={this.login}> Login </button>
       </div>
     );
+    } else if (this.state.isLogged === true) {
+      return (
+      <Artists />
+      );
+     }
   }
 }
 

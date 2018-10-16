@@ -3,9 +3,13 @@ import './Card.css';
 
 function Card(props) {
   return(
-    <div className="my-card">
-      {props.children}
-    </div>
+    <ul className="list-artists">
+    {
+      props.text.dataArtists.map((item, index) => {
+      return <li id={index}> {item.name} </li>
+      })
+    }
+    </ul>
   )
 }
 
