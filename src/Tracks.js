@@ -11,12 +11,12 @@ function Songs(props) {
   )
 }
 
-class Artists extends React.Component {
+class Tracks extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dataArtists: []
+      dataTracks: []
     }
   }
 
@@ -26,21 +26,22 @@ class Artists extends React.Component {
       credentials: 'include'
     };
   
-    fetch("https://peaceful-badlands-98440.herokuapp.com/artists", options)
+    fetch("https://peaceful-badlands-98440.herokuapp.com/tracks", options)
     .then(res => res.json())
-    .then(data => this.setState({dataArtists: data}))
+    .then(data => this.setState({dataTracks: data}))
   }
 
   render() {
     return (
       <div>
-        <h1> O que você quer ouvir hoje? </h1>
+        <h1> SongApp </h1>
+        <button type="button"> Ver artistas </button>
         {
-          this.state.dataArtists.length > 0 ? <Songs text={this.state} /> : "Carregando..."
+          this.state.dataTracks.length > 0 ? <Songs text={this.state} /> : "Carregando..."
         }
       </div>
     );
   }
 }
 
-export default Artists;
+export default Tracks;

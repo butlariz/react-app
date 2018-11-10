@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from "./Form.js";
 import Button from "./Button.js";
-import Artists from "./Artists.js";
+import Tracks from "./Tracks.js";
 import './App.css';
 
 class App extends Component {
@@ -9,14 +9,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLogged: true
+      isLogged: false
     }
 
     this.signUp = this.signUp.bind(this);
     this.login = this.login.bind(this);
-  }
-
-  componentDidMount() {
   }
 
   login() {
@@ -59,6 +56,7 @@ class App extends Component {
     if (this.state.isLogged === false) {
     return (
       <div>
+        <h1>SongApp</h1>
         <Form />
         <button type="button" onClick={this.signUp}> Cadastre-se </button>
         <button type="button" onClick={this.login}> Login </button>
@@ -66,7 +64,7 @@ class App extends Component {
     );
     } else if (this.state.isLogged === true) {
       return (
-      <Artists />
+      <Tracks />
       );
      }
   }
